@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест по бизнес-анализу</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .test-description {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        
+        .test-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .question-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title:before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+        }
+        
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #f0f7fd;
+        }
+        
+        .option input {
+            margin-right: 10px;
+        }
+        
+        .open-question {
+            margin-top: 15px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .question-number {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .question-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Тест по бизнес-анализу</h1>
+        <div class="test-description">
+            15 вопросов для оценки знаний принципов BACCM™, типов требований и аналитических навыков
+        </div>
+    </header>
+    
+    <form class="test-container">
+        <!-- Раздел 1: Вопросы по BACCM™ -->
+        <div class="question-section">
+            <h2 class="section-title">Принципы BACCM™</h2>
+            
+            <!-- Вопрос 1 -->
+            <div class="question">
+                <span class="question-number">1</span>
+                Какой из принципов BACCM™ отвечает за причины, по которым проект был инициирован?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q1" value="a">
+                    Изменение
+                </label>
+                <label class="option">
+                    <input type="radio" name="q1" value="b">
+                    Потребность
+                </label>
+                <label class="option">
+                    <input type="radio" name="q1" value="c">
+                    Решение
+                </label>
+                <label class="option">
+                    <input type="radio" name="q1" value="d">
+                    Контекст
+                </label>
+            </div>
+            
+            <!-- Вопрос 2 -->
+            <div class="question">
+                <span class="question-number">2</span>
+                Какой элемент BACCM™ описывает заинтересованные стороны проекта?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q2" value="a">
+                    Стейкхолдеры
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="b">
+                    Ценность
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="c">
+                    Потребность
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="d">
+                    Контекст
+                </label>
+            </div>
+            
+            <!-- Вопрос 3 -->
+            <div class="question">
+                <span class="question-number">3</span>
+                Какой принцип BACCM™ определяет, что будет считаться успехом проекта?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q3" value="a">
+                    Ценность
+                </label>
+                <label class="option">
+                    <input type="radio" name="q3" value="b">
+                    Решение
+                </label>
+                <label class="option">
+                    <input type="radio" name="q3" value="c">
+                    Изменение
+                </label>
+                <label class="option">
+                    <input type="radio" name="q3" value="d">
+                    Контекст
+                </label>
+            </div>
+            
+            <!-- Вопрос 4 -->
+            <div class="question">
+                <span class="question-number">4</span>
+                Какой элемент BACCM™ описывает среду, в которой существует проблема?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q4" value="a">
+                    Потребность
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="b">
+                    Контекст
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="c">
+                    Стейкхолдеры
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="d">
+                    Решение
+                </label>
+            </div>
+            
+            <!-- Вопрос 5 -->
+            <div class="question">
+                <span class="question-number">5</span>
+                Какой принцип BACCM™ описывает способ удовлетворения потребности?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q5" value="a">
+                    Изменение
+                </label>
+                <label class="option">
+                    <input type="radio" name="q5" value="b">
+                    Ценность
+                </label>
+                <label class="option">
+                    <input type="radio" name="q5" value="c">
+                    Решение
+                </label>
+                <label class="option">
+                    <input type="radio" name="q5" value="d">
+                    Контекст
+                </label>
+            </div>
+        </div>
+        
+        <!-- Раздел 2: Определение типа требований -->
+        <div class="question-section">
+            <h2 class="section-title">Типы требований</h2>
+            
+            <!-- Вопрос 6 -->
+            <div class="question">
+                <span class="question-number">6</span>
+                Определите тип требования: "Система должна загружать страницу за 2 секунды при одновременной работе 100 пользователей"
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q6" value="a">
+                    Функциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="b">
+                    Нефункциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="c">
+                    Бизнес-требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q6" value="d">
+                    Требование стейкхолдера
+                </label>
+            </div>
+            
+            <!-- Вопрос 7 -->
+            <div class="question">
+                <span class="question-number">7</span>
+                Определите тип требования: "Система должна позволять пользователям сбрасывать пароль через email"
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q7" value="a">
+                    Функциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q7" value="b">
+                    Нефункциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q7" value="c">
+                    Бизнес-правило
+                </label>
+                <label class="option">
+                    <input type="radio" name="q7" value="d">
+                    Ограничение проекта
+                </label>
+            </div>
+            
+            <!-- Вопрос 8 -->
+            <div class="question">
+                <span class="question-number">8</span>
+                Определите тип требования: "Все финансовые данные должны шифроваться по стандарту AES-256"
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q8" value="a">
+                    Функциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="b">
+                    Нефункциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="c">
+                    Бизнес-требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q8" value="d">
+                    Пользовательская история
+                </label>
+            </div>
+            
+            <!-- Вопрос 9 -->
+            <div class="question">
+                <span class="question-number">9</span>
+                Определите тип требования: "Приложение должно поддерживать 5 языков интерфейса"
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q9" value="a">
+                    Функциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q9" value="b">
+                    Нефункциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q9" value="c">
+                    Бизнес-правило
+                </label>
+                <label class="option">
+                    <input type="radio" name="q9" value="d">
+                    Ограничение реализации
+                </label>
+            </div>
+            
+            <!-- Вопрос 10 -->
+            <div class="question">
+                <span class="question-number">10</span>
+                Определите тип требования: "Система должна интегрироваться с 1С для обмена данными о заказах"
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q10" value="a">
+                    Функциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q10" value="b">
+                    Нефункциональное требование
+                </label>
+                <label class="option">
+                    <input type="radio" name="q10" value="c">
+                    Техническое ограничение
+                </label>
+                <label class="option">
+                    <input type="radio" name="q10" value="d">
+                    Бизнес-требование
+                </label>
+            </div>
+        </div>
+        
+        <!-- Раздел 3: Открытые вопросы -->
+        <div class="question-section">
+            <h2 class="section-title">Открытые вопросы</h2>
+            
+            <!-- Вопрос 11 -->
+            <div class="question">
+                <span class="question-number">11</span>
+                Объясните разницу между бизнес-требованиями и требованиями стейкхолдеров. Приведите примеры.
+            </div>
+            <div class="open-question">
+                <textarea name="q11" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 12 -->
+            <div class="question">
+                <span class="question-number">12</span>
+                Опишите, как принципы BACCM™ могут помочь в управлении изменениями требований в проекте.
+            </div>
+            <div class="open-question">
+                <textarea name="q12" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 13 -->
+            <div class="question">
+                <span class="question-number">13</span>
+                Какие критерии вы используете для определения, является ли требование хорошо сформулированным? Приведите пример плохого и хорошего требования.
+            </div>
+            <div class="open-question">
+                <textarea name="q13" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 14 -->
+            <div class="question">
+                <span class="question-number">14</span>
+                Как вы определяете приоритеты требований в проекте с ограниченными ресурсами? Опишите ваш подход.
+            </div>
+            <div class="open-question">
+                <textarea name="q14" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 15 -->
+            <div class="question">
+                <span class="question-number">15</span>
+                Опишите процесс валидации требований. Как вы убеждаетесь, что требования действительно решают бизнес-проблему?
+            </div>
+            <div class="open-question">
+                <textarea name="q15" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">Отправить ответы</button>
+    </form>
+</body>
+</html>

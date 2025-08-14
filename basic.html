@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы бизнес- и системного анализа</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .presentation {
+            width: 1000px;
+            height: 700px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            position: absolute;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        .slide.active {
+            display: block;
+            opacity: 1;
+        }
+        .slide h1, .slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #005566;
+        }
+        .slide ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .slide li {
+            margin: 15px 0;
+            font-size: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            text-align: left;
+        }
+        .slide.active li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide li:nth-child(1) { transition-delay: 0.2s; }
+        .slide li:nth-child(2) { transition-delay: 0.4s; }
+        .slide li:nth-child(3) { transition-delay: 0.6s; }
+        .slide li:nth-child(4) { transition-delay: 0.8s; }
+        .slide li:nth-child(5) { transition-delay: 1s; }
+        .slide li:nth-child(6) { transition-delay: 1.2s; }
+        .icon {
+            font-size: 1.8em;
+            margin-right: 10px;
+        }
+        .table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            font-size: 1em;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+        .table th {
+            background: #005566;
+            color: white;
+        }
+        .pyramid {
+            width: 400px;
+            margin: 30px auto;
+            position: relative;
+        }
+        .pyramid div {
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 12px;
+            margin: 8px 0;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .slide.active .pyramid div {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .pyramid .level1 { background: #005566; width: 200px; margin-left: 100px; transition-delay: 0.2s; }
+        .pyramid .level2 { background: #007bff; width: 300px; margin-left: 50px; transition-delay: 0.4s; }
+        .pyramid .level3 { background: #28a745; width: 400px; margin-left: 0; transition-delay: 0.6s; }
+        .pyramid .level4 { background: #dc3545; width: 500px; margin-left: -50px; transition-delay: 0.8s; }
+        .nav-buttons {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-buttons button {
+            padding: 12px 25px;
+            margin: 0 15px;
+            cursor: pointer;
+            background: #005566;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        .nav-buttons button:hover {
+            background: #003d4a;
+        }
+        .nav-buttons button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .nav-buttons .slide-indicator {
+            font-size: 0.9em;
+            color: #333;
+        }
+        .slide p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 15px auto;
+        }
+        .quote {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #555;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+        canvas {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Слайд 1: Титульный -->
+        <div class="slide active" id="slide1">
+            <h1>Основы бизнес- и системного анализа</h1>
+            <p>Концепции и инструменты для аналитиков</p>
+            <p style="font-size: 0.9em;">Август 2025</p>
+        </div>
+        <!-- Слайд 2: Роль аналитика -->
+        <div class="slide" id="slide2">
+            <h2>Роль аналитика</h2>
+            <p class="quote">"Связующее звено между заинтересованными сторонами для достижения целей организации" <br>— BABOK v.2</p>
+            <ul>
+                <li><span class="icon">🌉</span>Мост между бизнесом и IT</li>
+                <li><span class="icon">🏢</span>Понимает структуру и цели бизнеса</li>
+                <li><span class="icon">💻</span>Рекомендует решения для IT</li>
+            </ul>
+        </div>
+        <!-- Слайд 3: BACCM™ -->
+        <div class="slide" id="slide3">
+            <h2>BACCM™</h2>
+            <p class="quote">"Практика, которая позволяет осуществлять изменения путем определения потребностей и рекомендаций по решениям" <br>— BABOK v.3</p>
+            <ul>
+                <li><span class="icon">📘</span>Концептуальная модель BABOK</li>
+                <li>6 терминов для бизнес-анализа</li>
+            </ul>
+        </div>
+        <!-- Слайд 4: Принципы BACCM™ (1-3) -->
+        <div class="slide" id="slide4">
+            <h2>BACCM™: Принципы 1-3</h2>
+            <ul>
+                <li><span class="icon">🔄</span>Change: Контролируемая трансформация (напр., внедрение CRM)</li>
+                <li><span class="icon">💡</span>Need: Проблема или возможность (напр., снижение затрат)</li>
+                <li><span class="icon">⚙️</span>Solution: Способ удовлетворения потребности (напр., мобильное приложение)</li>
+            </ul>
+        </div>
+        <!-- Слайд 5: Принципы BACCM™ (4-6) -->
+        <div class="slide" id="slide5">
+            <h2>BACCM™: Принципы 4-6</h2>
+            <ul>
+                <li><span class="icon">👥</span>Stakeholder: Заинтересованные стороны (напр., клиенты)</li>
+                <li><span class="icon">⭐</span>Value: Потенциальная значимость (напр., рост дохода)</li>
+                <li><span class="icon">🌍</span>Context: Окружающая среда (напр., рынок)</li>
+            </ul>
+        </div>
+        <!-- Слайд 6: SMART цели -->
+        <div class="slide" id="slide6">
+            <h2>SMART цели</h2>
+            <ul>
+                <li><span class="icon">🎯</span>Specific: Четкая и ясная цель</li>
+                <li><span class="icon">📏</span>Measurable: Измеримая по критериям</li>
+                <li><span class="icon">✅</span>Achievable: Достижимая и амбициозная</li>
+                <li><span class="icon">🔗</span>Relevant: Соответствует потребностям</li>
+                <li><span class="icon">⏰</span>Time-bound: Имеет дедлайн</li>
+            </ul>
+        </div>
+        <!-- Слайд 7: Формула целей -->
+        <div class="slide" id="slide7">
+            <h2>Формула целей</h2>
+            <p>Чтобы [цель] путем [действия] для [ценности] в [сроки]</p>
+            <p>Пример: Увеличить продажи на 20% путем внедрения онлайн-магазина для удобства клиентов в течение 6 месяцев</p>
+        </div>
+        <!-- Слайд 8: Таблица требований -->
+        <div class="slide" id="slide8">
+            <h2>Функциональные vs Нефункциональные</h2>
+            <table class="table">
+                <tr><th>Аспект</th><th>Функциональные</th><th>Нефункциональные</th></tr>
+                <tr><td>Описание</td><td>Поведение системы</td><td>Качество/производительность</td></tr>
+                <tr><td>Примеры</td><td>Авторизация, отчеты</td><td>Скорость <2 сек</td></tr>
+                <tr><td>Фокус</td><td>Функции</td><td>Ограничения</td></tr>
+            </table>
+        </div>
+        <!-- Слайд 9: Пирамида (1) -->
+        <div class="slide" id="slide9">
+            <h2>Иерархия требований (1)</h2>
+            <div class="pyramid">
+                <div class="level1">Бизнес-требования<br>(напр., рост доли рынка)</div>
+                <div class="level2">Требования стейкхолдеров<br>(напр., доступ к данным)</div>
+            </div>
+        </div>
+        <!-- Слайд 10: Пирамида (2) -->
+        <div class="slide" id="slide10">
+            <h2>Иерархия требований (2)</h2>
+            <div class="pyramid">
+                <div class="level3">Требования к решению<br>(напр., интеграция API)</div>
+                <div class="level4">Транзитные требования<br>(напр., миграция данных)</div>
+            </div>
+        </div>
+        <!-- Слайд 11: Итог -->
+        <div class="slide" id="slide11">
+            <h2>Итог</h2>
+            <ul>
+                <li>Аналитик — связующее звено</li>
+                <li>BACCM™ структурирует анализ</li>
+                <li>SMART и формула для целей</li>
+                <li>Требования: иерархия и типы</li>
+            </ul>
+        </div>
+        <!-- Слайд 12: Реальный кейс -->
+        <div class="slide" id="slide12">
+            <h2>Реальный кейс</h2>
+            <ul>
+                <li><span class="icon">📈</span>Компания X: +30% дохода</li>
+                <li>Проблема: Низкая конверсия</li>
+                <li>Анализ: Интервью с клиентами</li>
+                <li>Решение: Внедрение CRM</li>
+            </ul>
+            <canvas id="growthChart"></canvas>
+        </div>
+        <!-- Слайд 13: Инструменты -->
+        <div class="slide" id="slide13">
+            <h2>Инструменты аналитика</h2>
+            <ul>
+                <li><span class="icon">🛠️</span>JIRA: Управление задачами</li>
+                <li><span class="icon">📝</span>Confluence: Документация</li>
+                <li><span class="icon">📊</span>BPMN: Моделирование процессов</li>
+                <li><span class="icon">🔗</span>UML: Диаграммы систем</li>
+            </ul>
+        </div>
+        <!-- Слайд 14: Ошибки -->
+        <div class="slide" id="slide14">
+            <h2>Ошибки аналитиков</h2>
+            <ul>
+                <li><span class="icon">⚠️</span>Нечеткие требования → Используйте SMART</li>
+                <li><span class="icon">⚠️</span>Игнор стейкхолдеров → Проводите интервью</li>
+                <li><span class="icon">⚠️</span>Сложные документы → Упрощайте</li>
+            </ul>
+        </div>
+        <!-- Слайд 15: Вопросы для обсуждения -->
+        <div class="slide" id="slide15">
+            <h2>Вопросы для обсуждения</h2>
+            <ul>
+                <li><span class="icon">💬</span>Как выявляете потребности?</li>
+                <li><span class="icon">💬</span>Какие инструменты используете?</li>
+                <li><span class="icon">💬</span>Как избегаете ошибок?</li>
+            </ul>
+        </div>
+        <!-- Слайд 16: Q&A и контакты -->
+        <div class="slide" id="slide16">
+            <h2>Вопросы?</h2>
+            <p>Давайте обсудим!</p>
+           
+        </div>
+        <!-- Навигация -->
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">Назад</button>
+            <span class="slide-indicator">Слайд <span id="currentSlideNumber">1</span> из 16</span>
+            <button onclick="nextSlide()">Вперед</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 16;
+
+        function showSlide(slideNumber) {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.opacity = 0;
+            });
+            const newSlide = document.getElementById(`slide${slideNumber}`);
+            newSlide.classList.add('active');
+            setTimeout(() => { newSlide.style.opacity = 1; }, 10);
+            document.querySelector('button[onclick="prevSlide()"]').disabled = slideNumber === 1;
+            document.querySelector('button[onclick="nextSlide()"]').disabled = slideNumber === totalSlides;
+            document.getElementById('currentSlideNumber').textContent = slideNumber;
+            if (slideNumber === 12) {
+                initChart();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['До', 'После'],
+                    datasets: [{
+                        label: 'Доход компании X',
+                        data: [100, 130],
+                        borderColor: '#005566',
+                        backgroundColor: 'rgba(0,85,102,0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейсы для ассессмента по бизнес-анализу</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .case-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .case {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .case:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .case-title {
+            color: #3498db;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .problem {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title:before {
+            content: "▶";
+            margin-right: 8px;
+            font-size: 0.8em;
+            color: #3498db;
+        }
+        
+        .questions {
+            padding-left: 20px;
+        }
+        
+        .question {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .question:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .requirements {
+            display: flex;
+            gap: 30px;
+            margin-top: 10px;
+        }
+        
+        .req-type {
+            flex: 1;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .req-type h4 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .requirements {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .case {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Кейсы для ассессмента по бизнес- и системному анализу</h1>
+    
+    <div class="case-container">
+        <!-- Кейс 1 -->
+        <div class="case">
+            <h2 class="case-title">Кейс 1: Мобильное приложение для доставки еды</h2>
+            <div class="problem">Проблема: Компания "FoodExpress" хочет запустить мобильное приложение для доставки еды, чтобы увеличить долю рынка.</div>
+            
+            <div class="section">
+                <h3 class="section-title">BACCM™</h3>
+                <div class="questions">
+                    <div class="question">Кто ключевые стейкхолдеры?</div>
+                    <div class="question">В чём ценность приложения для клиентов и бизнеса?</div>
+                    <div class="question">Каковы основные потребности, которые закрывает приложение?</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">SMART-цели</h3>
+                <div class="questions">
+                    <div class="question">Увеличить количество заказов через приложение на 30% за 6 месяцев.</div>
+                    <div class="question">Достичь 90% удовлетворённости пользователей интерфейсом через 3 месяца после запуска.</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Требования</h3>
+                <div class="requirements">
+                    <div class="req-type">
+                        <h4>Функциональные:</h4>
+                        <div class="question">Возможность выбора ресторана и блюд.</div>
+                        <div class="question">Система оплаты онлайн (карта, Apple Pay).</div>
+                        <div class="question">Отслеживание статуса заказа в реальном времени.</div>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные:</h4>
+                        <div class="question">Время загрузки приложения ≤ 2 сек.</div>
+                        <div class="question">Поддержка 10 000 одновременных пользователей.</div>
+                        <div class="question">Совместимость с iOS и Android.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 2 -->
+        <div class="case">
+            <h2 class="case-title">Кейс 2: Автоматизация HR-отчётности</h2>
+            <div class="problem">Проблема: Компания "TechCorp" тратит 20 часов в неделю на ручное формирование отчётов по персоналу.</div>
+            
+            <div class="section">
+                <h3 class="section-title">BACCM™</h3>
+                <div class="questions">
+                    <div class="question">Какие изменения нужны в процессе?</div>
+                    <div class="question">Кто основные стейкхолдеры (HR, менеджеры, IT)?</div>
+                    <div class="question">Как решение создаст ценность для бизнеса?</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">SMART-цели</h3>
+                <div class="questions">
+                    <div class="question">Сократить время формирования отчётов с 20 до 2 часов в неделю за 4 месяца.</div>
+                    <div class="question">Обеспечить 100% точность данных в автоматических отчётах.</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Требования</h3>
+                <div class="requirements">
+                    <div class="req-type">
+                        <h4>Функциональные:</h4>
+                        <div class="question">Генерация отчётов по шаблонам (увольнения, найм).</div>
+                        <div class="question">Интеграция с 1С и Excel.</div>
+                        <div class="question">Рассылка отчётов на email.</div>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные:</h4>
+                        <div class="question">Защита персональных данных (GDPR).</div>
+                        <div class="question">Доступность 24/7.</div>
+                        <div class="question">Поддержка 50+ пользователей одновременно.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 3 -->
+        <div class="case">
+            <h2 class="case-title">Кейс 3: Внедрение CRM для малого бизнеса</h2>
+            <div class="problem">Проблема: Магазин "HomeGoods" теряет клиентов из-за отсутствия системы управления взаимоотношениями.</div>
+            
+            <div class="section">
+                <h3 class="section-title">BACCM™</h3>
+                <div class="questions">
+                    <div class="question">Какие потребности клиентов и бизнеса решает CRM?</div>
+                    <div class="question">Кто будет основными пользователями (продавцы, менеджеры)?</div>
+                    <div class="question">Как измерить успех внедрения?</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">SMART-цели</h3>
+                <div class="questions">
+                    <div class="question">Увеличить повторные продажи на 25% за год.</div>
+                    <div class="question">Сократить время обработки заявки с 1 дня до 2 часов.</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Требования</h3>
+                <div class="requirements">
+                    <div class="req-type">
+                        <h4>Функциональные:</h4>
+                        <div class="question">Ведение базы клиентов с историей покупок.</div>
+                        <div class="question">Напоминания о follow-up (звонки, email).</div>
+                        <div class="question">Анализ продаж по категориям.</div>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные:</h4>
+                        <div class="question">Обучение сотрудников за 1 неделю.</div>
+                        <div class="question">Резервное копирование данных раз в сутки.</div>
+                        <div class="question">Доступ с мобильных устройств.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 4 -->
+        <div class="case">
+            <h2 class="case-title">Кейс 4: Чат-бот для банка</h2>
+            <div class="problem">Проблема: Банк "FinTrust" хочет снизить нагрузку на call-центр, внедрив чат-бота для ответов на частые вопросы.</div>
+            
+            <div class="section">
+                <h3 class="section-title">BACCM™</h3>
+                <div class="questions">
+                    <div class="question">Какие потребности клиентов закроет бот (например, баланс, переводы)?</div>
+                    <div class="question">Кто стейкхолдеры (клиенты, IT, служба поддержки)?</div>
+                    <div class="question">Какую ценность принесёт автоматизация?</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">SMART-цели</h3>
+                <div class="questions">
+                    <div class="question">Уменьшить количество звонков в call-центр на 40% за 5 месяцев.</div>
+                    <div class="question">Обеспечить 85% точности ответов бота.</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Требования</h3>
+                <div class="requirements">
+                    <div class="req-type">
+                        <h4>Функциональные:</h4>
+                        <div class="question">Проверка баланса по запросу.</div>
+                        <div class="question">Ответы на FAQ (проценты, тарифы).</div>
+                        <div class="question">Переключение на оператора.</div>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные:</h4>
+                        <div class="question">Время ответа ≤ 3 сек.</div>
+                        <div class="question">Интеграция с банковской системой.</div>
+                        <div class="question">Поддержка 5 языков.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 5 -->
+        <div class="case">
+            <h2 class="case-title">Кейс 5: Система бронирования переговорных</h2>
+            <div class="problem">Проблема: В офисе "OfficeSpace" хаотично бронируют переговорки, что приводит к конфликтам.</div>
+            
+            <div class="section">
+                <h3 class="section-title">BACCM™</h3>
+                <div class="questions">
+                    <div class="question">Каковы боли сотрудников?</div>
+                    <div class="question">Кто стейкхолдеры (офис-менеджер, сотрудники)?</div>
+                    <div class="question">Какое решение создаст ценность?</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">SMART-цели</h3>
+                <div class="questions">
+                    <div class="question">Сократить количество конфликтов из-за брони на 90% за 2 месяца.</div>
+                    <div class="question">Обеспечить 100% заполняемость переговорок в часы пик.</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Требования</h3>
+                <div class="requirements">
+                    <div class="req-type">
+                        <h4>Функциональные:</h4>
+                        <div class="question">Календарь бронирования с визуализацией.</div>
+                        <div class="question">Уведомления о подтверждении.</div>
+                        <div class="question">Отмена брони за 1 час.</div>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные:</h4>
+                        <div class="question">Доступ через корпоративный портал.</div>
+                        <div class="question">Автоотмена брони при опоздании >15 мин.</div>
+                        <div class="question">Поддержка 200+ пользователей.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

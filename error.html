@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ошибки при формулировании требований</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .mistakes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .mistake {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            transition: transform 0.3s ease;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .mistake:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .mistake-title {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mistake-title:before {
+            content: "❗";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .problem {
+            background-color: #fdecea;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .problem:before {
+            content: "Проблема:";
+            font-weight: bold;
+            color: #c0392b;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .solution {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .solution:before {
+            content: "Как исправить:";
+            font-weight: bold;
+            color: #27ae60;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .examples {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .wrong-example, .right-example {
+            flex: 1;
+            padding: 15px;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .wrong-example {
+            background-color: #fdedec;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .right-example {
+            background-color: #eafaf1;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .wrong-example:before {
+            content: "❌ Неправильно:";
+            font-weight: bold;
+            color: #e74c3c;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .right-example:before {
+            content: "✅ Правильно:";
+            font-weight: bold;
+            color: #27ae60;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .examples {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .mistake {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>5 распространённых ошибок при формулировании требований и целей</h1>
+    
+    <div class="mistakes-container">
+        <!-- Ошибка 1 -->
+        <div class="mistake">
+            <h2 class="mistake-title">Несоответствие критериям SMART</h2>
+            <div class="problem">
+                Цели без конкретных параметров (времени, измеримости) сложно отслеживать и достигать.
+            </div>
+            <div class="solution">
+                Добавить конкретные показатели, сроки и критерии достижения.
+            </div>
+            <div class="examples">
+                <div class="wrong-example">
+                    "Увеличить продажи" – нет цифр, сроков.
+                </div>
+                <div class="right-example">
+                    "Увеличить онлайн-продажи на 20% за 6 месяцев (с января по июнь 2025 года)" – измеримо и ограничено по времени.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ошибка 2 -->
+        <div class="mistake">
+            <h2 class="mistake-title">Смешение функциональных и нефункциональных требований</h2>
+            <div class="problem">
+                Путаница приводит к ошибкам в разработке (например, дизайн интерфейса ошибочно включают в функциональные требования).
+            </div>
+            <div class="solution">
+                Чётко разделять требования на функциональные (что делает система) и нефункциональные (как она это делает).
+            </div>
+            <div class="examples">
+                <div class="wrong-example">
+                    "Система должна быть удобной и обрабатывать 1000 заказов в час" – объединены нефункциональное (удобство) и функциональное (обработка заказов).
+                </div>
+                <div class="right-example">
+                    <div>Функциональное: "Система должна принимать заказы через корзину".</div>
+                    <div>Нефункциональное: "Интерфейс должен получить оценку удобства ≥ 4/5 по тестам юзабилити".</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ошибка 3 -->
+        <div class="mistake">
+            <h2 class="mistake-title">Требования без контекста (слишком абстрактные)</h2>
+            <div class="problem">
+                Разработчики не понимают, как реализовать требование из-за отсутствия конкретики.
+            </div>
+            <div class="solution">
+                Добавлять конкретные детали реализации и примеры использования.
+            </div>
+            <div class="examples">
+                <div class="wrong-example">
+                    "Система должна быть безопасной" – нет деталей.
+                </div>
+                <div class="right-example">
+                    "Система должна требовать двухфакторную аутентификацию для доступа к финансовым данным" – конкретное действие.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ошибка 4 -->
+        <div class="mistake">
+            <h2 class="mistake-title">Игнорирование стейкхолдеров</h2>
+            <div class="problem">
+                Требования не учитывают потребности всех заинтересованных сторон (например, IT-отдела или конечных пользователей).
+            </div>
+            <div class="solution">
+                Проводить интервью с ключевыми стейкхолдерами перед формулированием требований.
+            </div>
+            <div class="examples">
+                <div class="wrong-example">
+                    "Внедрить чат-бота за 1 месяц" – без учёта времени на обучение сотрудников.
+                </div>
+                <div class="right-example">
+                    "Внедрить чат-бота за 2 месяца, включая 2 недели на тестирование и обучение поддержки" – с учётом потребностей команды.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ошибка 5 -->
+        <div class="mistake">
+            <h2 class="mistake-title">Непроверяемые требования</h2>
+            <div class="problem">
+                Невозможно доказать выполнение требования из-за отсутствия измеримых критериев.
+            </div>
+            <div class="solution">
+                Добавлять количественные метрики для проверки выполнения.
+            </div>
+            <div class="examples">
+                <div class="wrong-example">
+                    "Приложение должно работать быстро" – нет метрик.
+                </div>
+                <div class="right-example">
+                    "Время загрузки страницы должно быть ≤ 1.5 секунд при 1000 одновременных пользователей" – можно измерить.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

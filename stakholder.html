@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструменты управления заинтересованными лицами</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .presentation {
+            width: 1000px;
+            height: 700px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            position: absolute;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        .slide.active {
+            display: block;
+            opacity: 1;
+        }
+        .slide h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #005566;
+        }
+        .slide h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #003d4a;
+        }
+        .slide ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .slide li {
+            margin: 20px 0;
+            font-size: 1.2em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            text-align: left;
+        }
+        .slide.active li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide li:nth-child(1) { transition-delay: 0.2s; }
+        .slide li:nth-child(2) { transition-delay: 0.4s; }
+        .slide li:nth-child(3) { transition-delay: 0.6s; }
+        .slide li:nth-child(4) { transition-delay: 0.8s; }
+        .slide li:nth-child(5) { transition-delay: 1s; }
+        .slide li:nth-child(6) { transition-delay: 1.2s; }
+        .icon {
+            font-size: 2em;
+            margin-right: 10px;
+        }
+        .table {
+            width: 80%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            font-size: 1.2em;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+        .table th {
+            background: #005566;
+            color: white;
+        }
+        .pyramid, .onion-diagram {
+            width: 400px;
+            margin: 40px auto;
+            position: relative;
+        }
+        .onion-diagram div {
+            border: 2px solid #005566;
+            border-radius: 50%;
+            padding: 20px;
+            text-align: center;
+            margin: 10px auto;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .slide.active .onion-diagram div {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .onion-layer1 { width: 150px; transition-delay: 0.2s; }
+        .onion-layer2 { width: 250px; transition-delay: 0.4s; }
+        .onion-layer3 { width: 350px; transition-delay: 0.6s; }
+        .onion-layer4 { width: 450px; transition-delay: 0.8s; }
+        .power-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            width: 500px;
+            margin: 40px auto;
+        }
+        .power-matrix div {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .slide.active .power-matrix div {
+            opacity: 1;
+        }
+        .nav-buttons {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-buttons button {
+            padding: 15px 30px;
+            margin: 0 20px;
+            cursor: pointer;
+            background: #005566;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            transition: background 0.3s;
+        }
+        .nav-buttons button:hover {
+            background: #003d4a;
+        }
+        .nav-buttons button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .nav-buttons .slide-indicator {
+            font-size: 1em;
+            color: #333;
+        }
+        .slide p {
+            font-size: 24px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .quote {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Слайд 1: Название -->
+        <div class="slide active" id="slide1">
+            <h1>Инструменты управления заинтересованными лицами</h1>
+            <p>Август 2025</p>
+        </div>
+        <!-- Слайд 2: Что изучим? -->
+        <div class="slide" id="slide2">
+            <h2>Что изучим?</h2>
+        </div>
+        <!-- Слайд 3: Содержание -->
+        <div class="slide" id="slide3">
+            <ul>
+                <li>1. Этапы работы с заинтересованными сторонами</li>
+                <li>2. Кто такие заинтересованные стороны?</li>
+                <li>3. Техники анализа заинтересованных сторон</li>
+            </ul>
+        </div>
+        <!-- Слайд 4: Поехали! -->
+        <div class="slide" id="slide4">
+            <h2>Поехали!</h2>
+        </div>
+        <!-- Слайд 5: Кто такие заинтересованные стороны? -->
+        <div class="slide" id="slide5">
+            <h2>Кто такие заинтересованные стороны?</h2>
+        </div>
+        <!-- Слайд 6: Определение -->
+        <div class="slide" id="slide6">
+            <h2>Заинтересованные стороны | Stakeholders</h2>
+            <p class="quote">Группа или отдельное лицо, связанное с изменением, потребностью или решением ©BABOK v. 3.0</p>
+            <p>Сторона, которая имеет интерес в деятельности компании и может влиять на бизнес или подвергаться влиянию бизнеса.</p>
+            <p>Все те люди, чьи интересы будут затронуты проектом.</p>
+        </div>
+        <!-- Слайд 7: Роли -->
+        <div class="slide" id="slide7">
+            <ul>
+                <li>Бизнес-аналитик</li>
+                <li>Эксперт по внедрению</li>
+                <li>Операционная поддержка</li>
+                <li>Заказчик</li>
+                <li>Конечный пользователь</li>
+                <li>Эксперт предметной области</li>
+                <li>Руководитель проекта</li>
+                <li>Регулятор</li>
+                <li>Спонсор</li>
+                <li>Поставщик</li>
+                <li>Тестировщик</li>
+            </ul>
+        </div>
+        <!-- Слайд 8: Внутренние vs Внешние -->
+        <div class="slide" id="slide8">
+            <h2>Внутренние</h2>
+            <ul>
+                <li>Сотрудники</li>
+                <li>Менеджеры</li>
+                <li>Члены правления</li>
+            </ul>
+            <h2>Внешние</h2>
+            <ul>
+                <li>Доноры</li>
+                <li>Инвесторы</li>
+                <li>Владельцы</li>
+                <li>Клиенты</li>
+                <li>Поставщики</li>
+                <li>Государство</li>
+                <li>Кредиторы</li>
+                <li>Общественность</li>
+            </ul>
+        </div>
+        <!-- Слайд 9: Классификация -->
+        <div class="slide" id="slide9">
+            <h2>Первичные</h2>
+            <ul>
+                <li>Сотрудники</li>
+            </ul>
+            <h2>Вторичные</h2>
+            <ul>
+                <li>Дополнительная классификация</li>
+                <li>Менеджмент</li>
+                <li>Поставщики</li>
+                <li>Партнеры</li>
+                <li>Регуляторы</li>
+                <li>Общественность</li>
+                <li>Ассоциации</li>
+                <li>Медиа</li>
+            </ul>
+        </div>
+        <!-- Слайд 10: Источники -->
+        <div class="slide" id="slide10">
+            <h2>Источники заинтересованных сторон</h2>
+            <ul>
+                <li>Проектная документация</li>
+                <li>Менеджер проекта</li>
+                <li>Мозговой штурм</li>
+                <li>Эксперты по конкретным вопросам</li>
+                <li>Поиск дополнительных источников</li>
+            </ul>
+        </div>
+        <!-- Слайд 11: Пример -->
+        <div class="slide" id="slide11">
+            <ul>
+                <li>Инвесторы</li>
+                <li>Менеджер</li>
+                <li>Сотрудники</li>
+                <li>Клиенты</li>
+                <li>Поставщики</li>
+                <li>Правительство</li>
+            </ul>
+        </div>
+        <!-- Слайд 12: Автоматизация -->
+        <div class="slide" id="slide12">
+            <h2>Автоматизация процесса продаж</h2>
+            <h3>Внутренние</h3>
+            <ul>
+                <li>Команда</li>
+                <li>Менеджеры</li>
+                <li>Связанные департаменты</li>
+            </ul>
+            <h3>Внешние</h3>
+            <ul>
+                <li>Поставщики</li>
+                <li>Клиенты</li>
+                <li>Акционеры</li>
+            </ul>
+        </div>
+        
+        <!-- Слайд 14: Управление -->
+        <div class="slide" id="slide14">
+            <h2>Управление заинтересованными сторонами</h2>
+            <p>это процесс организации, мониторинга и поддержания отношений с заинтересованными сторонами проекта</p>
+            <h2>Управление заинтересованными лицами</h2>
+        </div>
+        <!-- Слайд 15: Определение управления -->
+        <!-- Слайд 16: Этапы -->
+        <div class="slide" id="slide16">
+            <h2>Этапы управления</h2>
+            <ul>
+                <li>Идентификация заинтересованных лиц</li>
+                <li>Анализ заинтересованных лиц</li>
+                <li>Планирование взаимодействия с заинтересованными лицами</li>
+                <li>Вовлечение заинтересованных лиц и сотрудничество</li>
+            </ul>
+        </div>
+        <!-- Слайд 17: Идентификация -->
+        <div class="slide" id="slide17">
+            <h2>Идентификация</h2>
+            <ul>
+                <li>На кого повлияет ваш проект?</li>
+                <li>Кто заинтересован в вашем проекте?</li>
+                <li>Кто имеет власть над вашим проектом?</li>
+                <li>Кто хочет, чтобы ваш проект потерпел неудачу?</li>
+                <li>Кто хочет, чтобы ваш проект был успешным?</li>
+            </ul>
+        </div>
+        <!-- Слайд 18: Техники анализа -->
+        <div class="slide" id="slide18">
+            <h2>Техники анализа стейкхолдеров</h2>
+            <ul>
+                <li>Stakeholder Register (Реестр заинтересованных сторон)</li>
+                <li>Onion Diagram (Диаграмма луковицы)</li>
+                <li>Power Interest Matrix (Матрица власти и интересов)</li>
+                <li>RACI matrix (Матрица RACI)</li>
+            </ul>
+        </div>
+        <!-- Слайд 19: Stakeholder Register -->
+        <div class="slide" id="slide19">
+            <h2>Stakeholder Register</h2>
+            <p>Проектный документ, включающий идентификацию, оценку и классификацию заинтересованных сторон проекта.</p>
+            <ul>
+                <li>Имя</li>
+                <li>Компания</li>
+                <li>Должность</li>
+                <li>Средства связи</li>
+                <li>Предпочтительный способ связи</li>
+                <li>Часть рабочей группы</li>
+                <li>Функциональный блок</li>
+                <li>Влияние на проект</li>
+                <li>Лояльность к нам</li>
+                <li>Имеет полномочия для утверждения</li>
+                <li>Более подробную информацию можно получить у...</li>
+            </ul>
+        </div>
+        <!-- Слайд 20: Onion Diagram -->
+        <div class="slide" id="slide20">
+            <h2>Onion Diagram</h2>
+            <div class="onion-diagram">
+                <div class="onion-layer1">Разработка решения</div>
+                <div class="onion-layer2">Затрагиваемое организационное подразделение</div>
+                <div class="onion-layer3">Организация предприятия</div>
+                <div class="onion-layer4">Затрагиваемые внешние заинтересованные стороны</div>
+            </div>
+        </div>
+        <!-- Слайд 21: Power Interest Matrix -->
+        <div class="slide" id="slide21">
+            <h2>Power Interest Matrix</h2>
+            <div class="power-matrix">
+                <div>Наблюдать</div>
+                <div>Удовлетворять</div>
+                <div>Держать в курсе дел</div>
+                <div>Активно управлять</div>
+            </div>
+            <p>Интерес: Низкий/Высокий | Влияние: Низкое/Высокое</p>
+        </div>
+        <!-- Слайд 22: RACI matrix -->
+        <div class="slide" id="slide22">
+            <h2>RACI matrix</h2>
+        </div>
+        <!-- Слайд 23: RACI таблица -->
+        <div class="slide" id="slide23">
+            <table class="table">
+                <tr><th>Задача</th><th>R (Responsible)</th><th>A (Accountable)</th><th>C (Consulted)</th><th>I (Informed)</th></tr>
+                <tr><td>Принятие звонков</td><td>Оператор поддержки</td><td>Оператор поддержки</td><td>Руководитель отдела поддержки</td><td>Внутренние отделы</td></tr>
+                <tr><td>Выяснение проблемы</td><td>Оператор поддержки</td><td>Оператор поддержки</td><td>Руководитель отдела поддержки, Технический специалист</td><td>Внутренние отделы</td></tr>
+                <tr><td>Предоставление решения</td><td>Технический специалист</td><td>Технический специалист</td><td>-</td><td>Оператор поддержки, Клиент</td></tr>
+                <tr><td>Запись инцидента</td><td>Оператор поддержки</td><td>Оператор поддержки</td><td>-</td><td>Внутренние отделы</td></tr>
+                <tr><td>Отслеживание инцидента</td><td>Руководитель отдела поддержки</td><td>Руководитель отдела поддержки</td><td>-</td><td>Внутренние отделы</td></tr>
+                <tr><td>Закрытие инцидента</td><td>Оператор поддержки</td><td>Оператор поддержки</td><td>-</td><td>Клиент</td></tr>
+            </table>
+        </div>
+        <!-- Слайд 24: Планирование -->
+        <div class="slide" id="slide24">
+            <h2>Планирование взаимодействия с заинтересованными лицами</h2>
+            <ul>
+                <li>Тип информации для передачи</li>
+                <li>Подход к вовлечению</li>
+                <li>Каналы коммуникации</li>
+                <li>Частота взаимодействия</li>
+            </ul>
+        </div>
+        <!-- Слайд 25: Взаимодействие -->
+        <div class="slide" id="slide25">
+            <h2>Взаимодействие и сотрудничество с заинтересованными сторонами</h2>
+            <ul>
+                <li>Достижение согласия по обязательствам</li>
+                <li>Взаимодействие с заинтересованными сторонами</li>
+                <li>Сотрудничество с заинтересованными сторонами</li>
+            </ul>
+        </div>
+        <!-- Слайд 26: Каналы -->
+        <div class="slide" id="slide26">
+            <h2>Каналы коммуникаций</h2>
+        </div>
+        <!-- Слайд 27: Принципы -->
+        <div class="slide" id="slide27">
+            <h2>Принципы взаимодействия с заинтересованными сторонами</h2>
+            <ul>
+                <li>Встречайтесь с ними один на один</li>
+                <li>Слушайте, что они говорят</li>
+                <li>Определите их мотивацию</li>
+            </ul>
+        </div>
+        <!-- Слайд 28: Мягкая сила -->
+        <div class="slide" id="slide28">
+            <h2>Мягкая сила</h2>
+            <ul>
+                <li>Репутация</li>
+                <li>Обаяние</li>
+                <li>Мотивация</li>
+                <li>Отношения</li>
+            </ul>
+        </div>
+        <!-- Слайд 29: Thank you -->
+        <div class="slide" id="slide29">
+            <h2>Thank you</h2>
+        </div>
+        <!-- Навигация -->
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">Назад</button>
+            <span class="slide-indicator">Слайд <span id="currentSlideNumber">1</span> из 29</span>
+            <button onclick="nextSlide()">Вперед</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 29;
+
+        function showSlide(slideNumber) {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.opacity = 0;
+            });
+            const newSlide = document.getElementById(`slide${slideNumber}`);
+            newSlide.classList.add('active');
+            setTimeout(() => { newSlide.style.opacity = 1; }, 10);
+            document.querySelector('button[onclick="prevSlide()"]').disabled = slideNumber === 1;
+            document.querySelector('button[onclick="nextSlide()"]').disabled = slideNumber === totalSlides;
+            document.getElementById('currentSlideNumber').textContent = slideNumber;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

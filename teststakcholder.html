@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Управление стейкхолдерами</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .test-description {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        
+        .test-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .question-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title:before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+        }
+        
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #f0f7fd;
+        }
+        
+        .option input {
+            margin-right: 10px;
+        }
+        
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .matching-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            cursor: move;
+            background-color: white;
+        }
+        
+        .matching-target {
+            min-height: 50px;
+            border: 2px dashed #ccc;
+            border-radius: var(--border-radius);
+            padding: 10px;
+            margin-top: 10px;
+        }
+        
+        .open-question {
+            margin-top: 15px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .question-number {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .question-section {
+                padding: 15px;
+            }
+            
+            .matching-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Тест: Инструменты управления заинтересованными сторонами</h1>
+        <div class="test-description">
+            15 вопросов для оценки знаний управления стейкхолдерами
+        </div>
+    </header>
+    
+    <form class="test-container">
+        <!-- Категория 1: Вопросы с выбором одного ответа -->
+        <div class="question-section">
+            <h2 class="section-title">Основные понятия</h2>
+            
+            <!-- Вопрос 1 -->
+            <div class="question">
+                <span class="question-number">1</span>
+                Что является основной целью анализа стейкхолдеров?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q1" value="a">
+                    Определить всех, кто может повлиять на проект
+                </label>
+                <label class="option">
+                    <input type="radio" name="q1" value="b">
+                    Создать полный список требований
+                </label>
+                <label class="option">
+                    <input type="radio" name="q1" value="c">
+                    Разработать техническое задание
+                </label>
+                <label class="option">
+                    <input type="radio" name="q1" value="d">
+                    Оценить бюджет проекта
+                </label>
+            </div>
+            
+            <!-- Вопрос 2 -->
+            <div class="question">
+                <span class="question-number">2</span>
+                Какой инструмент используется для оценки влияния и заинтересованности стейкхолдеров?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q2" value="a">
+                    Матрица влияния-интереса
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="b">
+                    Диаграмма Ганта
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="c">
+                    SWOT-анализ
+                </label>
+                <label class="option">
+                    <input type="radio" name="q2" value="d">
+                    PERT-диаграмма
+                </label>
+            </div>
+            
+            <!-- Вопрос 3 -->
+            <div class="question">
+                <span class="question-number">3</span>
+                Что такое "матрица влияния-интереса"?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q3" value="a">
+                    Инструмент для визуального представления стейкхолдеров по их влиянию и интересу
+                </label>
+                <label class="option">
+                    <input type="radio" name="q3" value="b">
+                    Таблица с бюджетом проекта
+                </label>
+                <label class="option">
+                    <input type="radio" name="q3" value="c">
+                    График выполнения работ
+                </label>
+                <label class="option">
+                    <input type="radio" name="q3" value="d">
+                    Документ с требованиями к проекту
+                </label>
+            </div>
+            
+            <!-- Вопрос 4 -->
+            <div class="question">
+                <span class="question-number">4</span>
+                Кого можно считать стейкхолдером проекта?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q4" value="a">
+                    Всех, кто влияет на проект или заинтересован в его результатах
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="b">
+                    Только спонсора проекта
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="c">
+                    Только членов проектной команды
+                </label>
+                <label class="option">
+                    <input type="radio" name="q4" value="d">
+                    Только конечных пользователей
+                </label>
+            </div>
+            
+            <!-- Вопрос 5 -->
+            <div class="question">
+                <span class="question-number">5</span>
+                Какой из перечисленных факторов НЕ учитывается при анализе стейкхолдеров?
+            </div>
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="q5" value="a">
+                    Любимый цвет стейкхолдера
+                </label>
+                <label class="option">
+                    <input type="radio" name="q5" value="b">
+                    Уровень влияния на проект
+                </label>
+                <label class="option">
+                    <input type="radio" name="q5" value="c">
+                    Степень заинтересованности
+                </label>
+                <label class="option">
+                    <input type="radio" name="q5" value="d">
+                    Ожидания от проекта
+                </label>
+            </div>
+        </div>
+        
+        <!-- Категория 2: Вопросы на сопоставление -->
+        <div class="question-section">
+            <h2 class="section-title">Сопоставление инструментов</h2>
+            
+            <!-- Вопрос 6 -->
+            <div class="question">
+                <span class="question-number">6</span>
+                Сопоставьте инструмент управления стейкхолдерами с его описанием:
+            </div>
+            <div class="matching-container">
+                <div>
+                    <div class="matching-item" draggable="true" data-match="b">Реестр стейкхолдеров</div>
+                    <div class="matching-item" draggable="true" data-match="a">Матрица влияния-интереса</div>
+                    <div class="matching-item" draggable="true" data-match="d">План коммуникаций</div>
+                    <div class="matching-item" draggable="true" data-match="c">Карта стейкхолдеров</div>
+                </div>
+                <div>
+                    <div class="matching-target" data-match="a">Инструмент для визуального представления и категоризации стейкхолдеров</div>
+                    <div class="matching-target" data-match="b">Документ, содержащий информацию о всех заинтересованных сторонах проекта</div>
+                    <div class="matching-target" data-match="c">Графическое представление отношений между стейкхолдерами</div>
+                    <div class="matching-target" data-match="d">Документ, описывающий, как, когда и с кем нужно общаться</div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 7 -->
+            <div class="question">
+                <span class="question-number">7</span>
+                Сопоставьте тип стейкхолдера с рекомендуемой стратегией взаимодействия:
+            </div>
+            <div class="matching-container">
+                <div>
+                    <div class="matching-item" draggable="true" data-match="b">Высокое влияние, высокий интерес</div>
+                    <div class="matching-item" draggable="true" data-match="a">Высокое влияние, низкий интерес</div>
+                    <div class="matching-item" draggable="true" data-match="d">Низкое влияние, высокий интерес</div>
+                    <div class="matching-item" draggable="true" data-match="c">Низкое влияние, низкий интерес</div>
+                </div>
+                <div>
+                    <div class="matching-target" data-match="a">Удовлетворять, поддерживать интерес</div>
+                    <div class="matching-target" data-match="b">Тесно сотрудничать, вовлекать в принятие решений</div>
+                    <div class="matching-target" data-match="c">Мониторить, минимальное вовлечение</div>
+                    <div class="matching-target" data-match="d">Информировать, поддерживать интерес</div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 8 -->
+            <div class="question">
+                <span class="question-number">8</span>
+                Сопоставьте метод анализа с его описанием:
+            </div>
+            <div class="matching-container">
+                <div>
+                    <div class="matching-item" draggable="true" data-match="c">Power/Interest Grid</div>
+                    <div class="matching-item" draggable="true" data-match="a">Salience Model</div>
+                    <div class="matching-item" draggable="true" data-match="d">Stakeholder Cube</div>
+                    <div class="matching-item" draggable="true" data-match="b">Direction of Influence</div>
+                </div>
+                <div>
+                    <div class="matching-target" data-match="a">Оценивает стейкхолдеров по срочности, легитимности и власти</div>
+                    <div class="matching-target" data-match="b">Анализирует, влияет ли стейкхолдер на проект или находится под его влиянием</div>
+                    <div class="matching-target" data-match="c">Матрица влияния и интереса (классическая 2x2)</div>
+                    <div class="matching-target" data-match="d">Трехмерная модель анализа стейкхолдеров</div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 9 -->
+            <div class="question">
+                <span class="question-number">9</span>
+                Сопоставьте этап управления стейкхолдерами с его содержанием:
+            </div>
+            <div class="matching-container">
+                <div>
+                    <div class="matching-item" draggable="true" data-match="b">Идентификация</div>
+                    <div class="matching-item" draggable="true" data-match="a">Анализ</div>
+                    <div class="matching-item" draggable="true" data-match="d">Вовлечение</div>
+                    <div class="matching-item" draggable="true" data-match="c">Мониторинг</div>
+                </div>
+                <div>
+                    <div class="matching-target" data-match="a">Оценка влияния, интереса, ожиданий</div>
+                    <div class="matching-target" data-match="b">Выявление всех заинтересованных сторон</div>
+                    <div class="matching-target" data-match="c">Отслеживание изменений в позиции стейкхолдеров</div>
+                    <div class="matching-target" data-match="d">Разработка стратегий взаимодействия</div>
+                </div>
+            </div>
+            
+            <!-- Вопрос 10 -->
+            <div class="question">
+                <span class="question-number">10</span>
+                Сопоставьте тип коммуникации с его описанием:
+            </div>
+            <div class="matching-container">
+                <div>
+                    <div class="matching-item" draggable="true" data-match="a">Push</div>
+                    <div class="matching-item" draggable="true" data-match="b">Pull</div>
+                    <div class="matching-item" draggable="true" data-match="d">Interactive</div>
+                    <div class="matching-item" draggable="true" data-match="c">One-to-one</div>
+                </div>
+                <div>
+                    <div class="matching-target" data-match="a">Информация направляется конкретному получателю (email, письмо)</div>
+                    <div class="matching-target" data-match="b">Информация доступна для самостоятельного изучения (портал, база знаний)</div>
+                    <div class="matching-target" data-match="c">Персональное общение (встреча, звонок)</div>
+                    <div class="matching-target" data-match="d">Двусторонний обмен информацией (совещание, обсуждение)</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Категория 3: Открытые вопросы -->
+        <div class="question-section">
+            <h2 class="section-title">Практические вопросы</h2>
+            
+            <!-- Вопрос 11 -->
+            <div class="question">
+                <span class="question-number">11</span>
+                Опишите шаги, которые вы предпримете для выявления всех стейкхолдеров в новом проекте.
+            </div>
+            <div class="open-question">
+                <textarea name="q11" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 12 -->
+            <div class="question">
+                <span class="question-number">12</span>
+                Объясните, как вы будете работать со стейкхолдером с высоким влиянием, но низким интересом.
+            </div>
+            <div class="open-question">
+                <textarea name="q12" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 13 -->
+            <div class="question">
+                <span class="question-number">13</span>
+                Приведите пример конфликта интересов между двумя стейкхолдерами и предложите, как его можно разрешить.
+            </div>
+            <div class="open-question">
+                <textarea name="q13" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 14 -->
+            <div class="question">
+                <span class="question-number">14</span>
+                Как бы вы изменили стратегию взаимодействия со стейкхолдером, если его уровень влияния на проект увеличился?
+            </div>
+            <div class="open-question">
+                <textarea name="q14" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+            
+            <!-- Вопрос 15 -->
+            <div class="question">
+                <span class="question-number">15</span>
+                Опишите, как вы будете использовать матрицу влияния-интереса на практике в реальном проекте.
+            </div>
+            <div class="open-question">
+                <textarea name="q15" placeholder="Введите ваш ответ..."></textarea>
+            </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">Отправить ответы</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Drag and drop functionality for matching questions
+            const items = document.querySelectorAll('.matching-item');
+            const targets = document.querySelectorAll('.matching-target');
+            
+            let draggedItem = null;
+            
+            items.forEach(item => {
+                item.addEventListener('dragstart', function() {
+                    draggedItem = this;
+                    setTimeout(() => {
+                        this.style.opacity = '0.5';
+                    }, 0);
+                });
+                
+                item.addEventListener('dragend', function() {
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                        draggedItem = null;
+                    }, 0);
+                });
+            });
+            
+            targets.forEach(target => {
+                target.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = '#3498db';
+                });
+                
+                target.addEventListener('dragleave', function() {
+                    this.style.borderColor = '#ccc';
+                });
+                
+                target.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.style.borderColor = '#ccc';
+                    
+                    if (draggedItem && draggedItem.dataset.match === this.dataset.match) {
+                        this.innerHTML = draggedItem.textContent;
+                        draggedItem.style.display = 'none';
+                        
+                        // Add visual feedback for correct match
+                        this.style.backgroundColor = '#e8f8f5';
+                        this.style.border = '2px solid #27ae60';
+                    }
+                });
+            });
+            
+            // Form submission handling
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Тест завершен! Ответы отправлены.');
+                // In a real application, you would send the data to a server here
+            });
+        });
+    </script>
+</body>
+</html>

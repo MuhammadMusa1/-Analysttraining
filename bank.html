@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Банковские кейсы для бизнес-анализа</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: var(--secondary-color);
+            font-size: 1.2em;
+        }
+        
+        .cases-container {
+           
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        
+        .case-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            margin-top: 50px;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .case-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 20px;
+            position: relative;
+        }
+        
+        .case-number {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .case-title {
+            margin: 0;
+            font-size: 1.3em;
+        }
+        
+        .case-body {
+            padding: 20px;
+        }
+        
+        .problem-section {
+            background-color: #fdecea;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title:before {
+            content: "▸";
+            margin-right: 8px;
+            color: var(--secondary-color);
+        }
+        
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .req-type {
+            background-color: #f0f7fd;
+            padding: 12px;
+            border-radius: var(--border-radius);
+        }
+        
+        .req-type h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+        
+        .smart-goals {
+            background-color: #e8f8f5;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+        }
+        
+        .goal-item {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .goal-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .cases-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Банковские кейсы для бизнес-анализа</h1>
+        <div class="subtitle">Практические примеры для оценки навыков аналитика</div>
+    </header>
+    
+    <div class="cases-container">
+        <!-- Кейс 1 -->
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-number">1</div>
+                <h2 class="case-title">Мобильный банк для пенсионеров</h2>
+            </div>
+            <div class="case-body">
+                <div class="problem-section">
+                    Банк "СтарФинанс" хочет создать упрощённую версию мобильного приложения для клиентов старше 60 лет, так как текущее приложение получает низкие оценки удобства от этой аудитории.
+                </div>
+                
+                <h3 class="section-title">Ключевые элементы BACCM™</h3>
+                <ul>
+                    <li>Стейкхолдеры: пенсионеры, родственники, call-центр</li>
+                    <li>Ценность: доступность банковских услуг для старшего поколения</li>
+                    <li>Потребность: простой интерфейс с базовыми функциями</li>
+                </ul>
+                
+                <div class="requirements-grid">
+                    <div class="req-type">
+                        <h4>Функциональные требования</h4>
+                        <ul>
+                            <li>Крупные кнопки основных операций</li>
+                            <li>Голосовое управление</li>
+                            <li>Экстренный вызов родственника</li>
+                        </ul>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные требования</h4>
+                        <ul>
+                            <li>Шрифт не менее 16pt</li>
+                            <li>Контрастность интерфейса ≥ 4.5:1</li>
+                            <li>Обучение за 15 минут</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="smart-goals">
+                    <h3 class="section-title">SMART-цели</h3>
+                    <div class="goal-item">Увеличить NPS среди пользователей 60+ с 35 до 65 за 6 месяцев</div>
+                    <div class="goal-item">Сократить количество обращений в call-центр по вопросам мобильного банка на 40% к концу года</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 2 -->
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-number">2</div>
+                <h2 class="case-title">Система мошеннических транзакций</h2>
+            </div>
+            <div class="case-body">
+                <div class="problem-section">
+                    Банк "ФинансГарант" теряет около 2 млн руб. ежемесячно из-за мошеннических операций. Необходимо внедрить систему автоматического обнаружения подозрительных транзакций.
+                </div>
+                
+                <h3 class="section-title">Ключевые элементы BACCM™</h3>
+                <ul>
+                    <li>Стейкхолдеры: служба безопасности, ИТ-отдел, клиенты</li>
+                    <li>Ценность: снижение финансовых потерь и защита клиентов</li>
+                    <li>Потребность: оперативное выявление аномальных операций</li>
+                </ul>
+                
+                <div class="requirements-grid">
+                    <div class="req-type">
+                        <h4>Функциональные требования</h4>
+                        <ul>
+                            <li>Анализ паттернов поведения клиентов</li>
+                            <li>Автоматическая блокировка подозрительных операций</li>
+                            <li>Уведомление клиента о блокировке</li>
+                        </ul>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные требования</h4>
+                        <ul>
+                            <li>Время анализа транзакции ≤ 200 мс</li>
+                            <li>Ложные срабатывания ≤ 3%</li>
+                            <li>Интеграция с ЦБ РФ (информация о мошеннических схемах)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="smart-goals">
+                    <h3 class="section-title">SMART-цели</h3>
+                    <div class="goal-item">Снизить потери от мошенничества на 70% за 9 месяцев</div>
+                    <div class="goal-item">Обеспечить 95% точность обнаружения мошеннических операций через 6 месяцев</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 3 -->
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-number">3</div>
+                <h2 class="case-title">Онлайн-кредитование для МСБ</h2>
+            </div>
+            <div class="case-body">
+                <div class="problem-section">
+                    Банк "БизнесКредит" хочет автоматизировать процесс выдачи кредитов малому бизнесу, сократив время рассмотрения заявки с 3 дней до 1 часа.
+                </div>
+                
+                <h3 class="section-title">Ключевые элементы BACCM™</h3>
+                <ul>
+                    <li>Стейкхолдеры: предприниматели, кредитные аналитики, риск-менеджмент</li>
+                    <li>Ценность: ускорение получения финансирования для бизнеса</li>
+                    <li>Потребность: автоматический скоринг и принятие решений</li>
+                </ul>
+                
+                <div class="requirements-grid">
+                    <div class="req-type">
+                        <h4>Функциональные требования</h4>
+                        <ul>
+                            <li>Интеграция с ФНС и бухгалтерскими сервисами</li>
+                            <li>Автоматический расчёт кредитного рейтинга</li>
+                            <li>Личный кабинет для отслеживания заявки</li>
+                        </ul>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные требования</h4>
+                        <ul>
+                            <li>Обработка 500 заявок одновременно</li>
+                            <li>Аудит всех решений системы</li>
+                            <li>Резервное копирование данных каждые 15 минут</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="smart-goals">
+                    <h3 class="section-title">SMART-цели</h3>
+                    <div class="goal-item">Увеличить количество одобренных кредитов на 40% за год</div>
+                    <div class="goal-item">Сократить среднее время рассмотрения заявки до 45 минут к Q3 2025</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 4 -->
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-number">4</div>
+                <h2 class="case-title">Персональный финансовый помощник</h2>
+            </div>
+            <div class="case-body">
+                <div class="problem-section">
+                    "ЦифроБанк" хочет внедрить ИИ-помощника для анализа расходов клиентов и дачи рекомендаций по управлению бюджетом, чтобы увеличить вовлечённость.
+                </div>
+                
+                <h3 class="section-title">Ключевые элементы BACCM™</h3>
+                <ul>
+                    <li>Стейкхолдеры: клиенты, маркетинг, аналитики данных</li>
+                    <li>Ценность: помощь в финансовой грамотности и экономии</li>
+                    <li>Потребность: автоматическая категоризация расходов</li>
+                </ul>
+                
+                <div class="requirements-grid">
+                    <div class="req-type">
+                        <h4>Функциональные требования</h4>
+                        <ul>
+                            <li>Анализ транзакций по категориям</li>
+                            <li>Персонализированные советы по экономии</li>
+                            <li>Прогнозирование остатка до зарплаты</li>
+                        </ul>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные требования</h4>
+                        <ul>
+                            <li>Конфиденциальность данных клиента</li>
+                            <li>Обновление рекомендаций раз в 6 часов</li>
+                            <li>Поддержка голосовых запросов</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="smart-goals">
+                    <h3 class="section-title">SMART-цели</h3>
+                    <div class="goal-item">Увеличить DAU мобильного банка на 25% за 8 месяцев</div>
+                    <div class="goal-item">Достичь 70% удовлетворённости функционалом помощника через 3 месяца после запуска</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кейс 5 -->
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-number">5</div>
+                <h2 class="case-title">Переводы по номеру телефона</h2>
+            </div>
+            <div class="case-body">
+                <div class="problem-section">
+                    Банк "ПлатежиОнлайн" планирует внедрить сервис переводов по номеру телефона между клиентами любых банков, чтобы конкурировать с аналогичными решениями.
+                </div>
+                
+                <h3 class="section-title">Ключевые элементы BACCM™</h3>
+                <ul>
+                    <li>Стейкхолдеры: клиенты, операционный отдел, ЦБ РФ</li>
+                    <li>Ценность: удобные мгновенные переводы без реквизитов</li>
+                    <li>Потребность: соответствие регуляторным требованиям</li>
+                </ul>
+                
+                <div class="requirements-grid">
+                    <div class="req-type">
+                        <h4>Функциональные требования</h4>
+                        <ul>
+                            <li>Привязка номера телефона к банковскому счёту</li>
+                            <li>Лимиты на суммы переводов</li>
+                            <li>Подтверждение через СМС/приложение</li>
+                        </ul>
+                    </div>
+                    <div class="req-type">
+                        <h4>Нефункциональные требования</h4>
+                        <ul>
+                            <li>Время перевода ≤ 15 секунд</li>
+                            <li>Доступность 99.9% времени</li>
+                            <li>Шифрование всех передаваемых данных</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="smart-goals">
+                    <h3 class="section-title">SMART-цели</h3>
+                    <div class="goal-item">Привлечь 500 000 новых клиентов за первый год работы сервиса</div>
+                    <div class="goal-item">Обрабатывать 1 млн переводов ежемесячно через 6 месяцев после запуска</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2024 Банковские кейсы для бизнес-анализа | Используйте для оценки навыков аналитиков</p>
+    </footer>
+</body>
+</html>
